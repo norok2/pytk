@@ -1,5 +1,8 @@
-PyTK: a graphical-user interface abstraction toolkit
-====================================================
+PyTK - Python ToolKit
+=====================
+
+**PyTK** - **Py**thon **T**ool**K**it:
+Python abstract graphical user-interface toolkit
 
 This Python library intend to provide a sensible abstraction layer on top of
 the most widely used GUI toolkits.
@@ -7,7 +10,7 @@ This is similar to `AnyGUI <https://wiki.python.org/moin/AnyGui>`_
 except that we focus more on offering full and stable support for the standard
 Python GUI toolkit.
 
-The widget semantic follows HTML5 conventions.
+The widget semantic follows HTML conventions.
 
 There are plans to includes support for Text-based UIs (via ``asciimatics``).
 
