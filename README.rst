@@ -10,7 +10,10 @@ This is similar to `AnyGUI <https://wiki.python.org/moin/AnyGui>`_
 except that we focus more on offering full and stable support for the standard
 Python GUI toolkit.
 
-The widget semantic follows HTML conventions.
+For the moment, however, only a few tricks for common ``tkinter`` implementation
+patterns are in place.
+
+The widget semantic follows, when possible, HTML conventions.
 
 There are plans to includes support for Text-based UIs (via ``asciimatics``).
 
