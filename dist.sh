@@ -49,8 +49,8 @@ echo -e "(using config file: \`~/.pypirc\`)"
 PYPI_REPOSITORIES=("pipy" "test");
 NUM_PYPI_REPOSITORIES=${#PYPI_REPOSITORIES[@]}
 if [ "$NUM_PYPI_REPOSITORIES" -gt 1 ]; then
-    for FILE in ${PYPI_REPOSITORIES[@]}; do
-        CHOICE=${FILE%\.*}
+    for ITEM in ${PYPI_REPOSITORIES[@]}; do
+        CHOICE=${ITEM%\.*}
         CHOICES=${CHOICE}"|"${CHOICES}
     done
     echo -e -n "\n>> available targets: ["${CHOICES%?}"]"
@@ -83,8 +83,8 @@ if [ "$NUM_DISTS_FILES" -gt 1 ]; then
     read INPUT
     ONLY_LAST=${INPUT:-yes}
     if [ "$ONLY_LAST" = "no" ]; then
-        for FILE in ${DISTS_FILES[@]}; do
-            twine_upload "$FILE"
+        for ITEM in ${DISTS_FILES[@]}; do
+            twine_upload "$ITEM"
         done
     fi
 fi
