@@ -44,11 +44,11 @@ python setup.py bdist_wheel --universal
 # ======================================================================
 title "Distribute package"
 PYPIRC_EXT=pypirc
-PYPIRC_FILES=(*.$PYPIRC_EXT)
-NUM_PYPIRC_FILES=${#PYPIRC_FILES[@]}
+PYPI_REPOSITORIES="pipy test"
+NUM_PYPI_REPOSITORIES=${#PYPI_REPOSITORIES[@]}
 if [ -z "$1" ]; then
-    if [ "$NUM_PYPIRC_FILES" -gt 1 ]; then
-        for FILE in ${PYPIRC_FILES[@]}; do
+    if [ "$NUM_PYPI_REPOSITORIES" -gt 1 ]; then
+        for FILE in ${PYPI_REPOSITORIES[@]}; do
             CHOICE=${FILE%\.*}
             CHOICES=${CHOICE}"|"${CHOICES}
         done
@@ -66,16 +66,17 @@ if [ -z "$1" ]; then
 else
     PYPIRC=$1
 fi
-echo -e "HERE: ${PYPIRC_FILE}"
 if [ -z ${PYPIRC_FILE} ]; then
     PYPIRC_FILE=${PYPIRC}.${PYPIRC_EXT}
 fi
 echo -e "(use config file: $PYPIRC_FILE)"
 
 function twine_upload() {
-    if [ -f $1 ] && [ -f ${PYPIRC_FILE} ]; then
-        subtitle "Uploading \`$1\`"
-        twine upload --config-file "$PYPIRC_FILE" "$1"
+    PYPI_TARGET=$1
+    PYPI_REPOSITORY=${2:-pypi}
+    if [ -f ${PYPI_TARGET} ]; then
+        subtitle "Uploading \`${PYPI_TARGET}\` to \`${PYPI_REPOSITORY}\`"
+        twine upload --repository "${PYPI_REPOSITORY}" "${PYPI_TARGET}"
     else
         subtitle "Skipping \`$1\`"
     fi
