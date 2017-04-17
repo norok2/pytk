@@ -1,7 +1,7 @@
 PyTK - Python ToolKit
 =====================
 
-**PyTK** - **Py**thon **T**ool**K**it:
+**PyTK** - Python ToolKit:
 Python abstract graphical user-interface toolkit
 
 This Python library intend to provide a sensible abstraction layer on top of
