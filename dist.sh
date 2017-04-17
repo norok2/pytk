@@ -59,8 +59,10 @@ if [ -z "$1" ]; then
     else
         PYPIRC_FILE="${PYPIRC_FILES[0]}"
     fi
-else
+elif [ "$#" -ge 1 ]; then
     PYPIRC=$1
+else
+    PYPIRC=~/
 fi
 if [ -z ${PYPIRC_FILE} ]; then
     PYPIRC_FILE=${PYPIRC}.${PYPIRC_EXT}
