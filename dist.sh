@@ -56,8 +56,10 @@ if [ -z "$1" ]; then
         echo -e -n "\n>> choose target ["${CHOICE}"]: "
         read INPUT
         PYPIRC=${INPUT:-$CHOICE}
-    else
+    elif [ "$NUM_PYPIRC_FILES" -gt 0 ]; then
         PYPIRC_FILE="${PYPIRC_FILES[0]}"
+    else
+        PYPIRC_FILE=""
     fi
 elif [ "$#" -ge 1 ]; then
     PYPIRC=$1
