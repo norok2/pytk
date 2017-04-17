@@ -46,7 +46,7 @@ title "Distribute package"
 
 echo -e "(using config file: \`~/.pypirc\`)"
 
-PYPI_REPOSITORIES="pipy test"
+PYPI_REPOSITORIES=("pipy" "test");
 NUM_PYPI_REPOSITORIES=${#PYPI_REPOSITORIES[@]}
 if [ "$NUM_PYPI_REPOSITORIES" -gt 1 ]; then
     for FILE in ${PYPI_REPOSITORIES[@]}; do
