@@ -64,6 +64,7 @@ elif [ "$#" -ge 1 ]; then
 else
     PYPIRC=~/
 fi
+echo -e "HERE: ${PYPIRC_FILE}"
 if [ -z ${PYPIRC_FILE} ]; then
     PYPIRC_FILE=${PYPIRC}.${PYPIRC_EXT}
 fi
