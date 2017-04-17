@@ -57,6 +57,7 @@ if [ -z "$1" ]; then
         read INPUT
         PYPIRC=${INPUT:-$CHOICE}
     elif [ "$NUM_PYPIRC_FILES" -eq 1 ]; then
+        echo -e "there"
         PYPIRC_FILE="${PYPIRC_FILES[0]}"
     else
         PYPIRC_FILE=""
