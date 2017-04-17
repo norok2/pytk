@@ -56,16 +56,15 @@ if [ -z "$1" ]; then
         echo -e -n "\n>> choose target ["${CHOICE}"]: "
         read INPUT
         PYPIRC=${INPUT:-$CHOICE}
-    elif [ "$NUM_PYPIRC_FILES" -eq 1 ]; then
-        echo -e "$NUM_PYPIRC_FILES"
-        PYPIRC_FILE="${PYPIRC_FILES[0]}"
     else
-        PYPIRC_FILE=""
+        PYPIRC_FILE="${PYPIRC_FILES[0]}"
     fi
-elif [ "$#" -ge 1 ]; then
-    PYPIRC=$1
+    if [ "${PYPIRC_FILE}" == "*.$PYPIRC_EXT" ]; then
+        PYPIRC_FILE=""
+        PYPIRC="~/"
+    fi
 else
-    PYPIRC=~/
+    PYPIRC=$1
 fi
 echo -e "HERE: ${PYPIRC_FILE}"
 if [ -z ${PYPIRC_FILE} ]; then
