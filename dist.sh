@@ -46,6 +46,22 @@ title "Distribute package"
 
 echo -e "(using config file: \`~/.pypirc\`)"
 
+# content of `~/.pypirc`:
+#[distutils]
+#index-servers =
+#    pypi
+#    test
+#
+#[pypi]
+#repository:https://pypi.python.org/pypi
+#username:<user>
+#password:<password>
+#
+#[test]
+#repository:https://testpypi.python.org/pypi
+#username:<user>
+#password:<password>
+
 PYPI_REPOSITORIES=("test" "pypi");
 NUM_PYPI_REPOSITORIES=${#PYPI_REPOSITORIES[@]}
 if [ "$NUM_PYPI_REPOSITORIES" -gt 1 ]; then
