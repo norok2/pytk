@@ -20,7 +20,7 @@ Treeview = ttk.Treeview
 Combobox = ttk.Combobox
 Entry = ttk.Entry
 Checkbutton = ttk.Checkbutton
-Spinbox = tk.Spinbox
+# Spinbox = tk.Spinbox
 Scale = tk.Scale
 
 
@@ -84,14 +84,14 @@ class Spinbox(tk.Spinbox):
         self.step = kwargs['increment'] if 'increment' in kwargs else None
         if self.default is not None:
             self.set_val(self.default)
-        self.bind('<MouseWheel>', self.mouseWheel)
-        self.bind('<Button-4>', self.mouseWheel)
-        self.bind('<Button-5>', self.mouseWheel)
+        self.bind('<MouseWheel>', self.mousewheel)
+        self.bind('<Button-4>', self.mousewheel)
+        self.bind('<Button-5>', self.mousewheel)
         self.sys_events = {
             'scroll_up': {'unix': 4, 'win': +120},
             'scroll_down': {'unix': 5, 'win': -120}}
 
-    def mouseWheel(self, event):
+    def mousewheel(self, event):
         scroll_up = (
             event.num == self.sys_events['scroll_up']['unix'] or
             event.delta == self.sys_events['scroll_up']['win'])
@@ -144,14 +144,14 @@ class Range(Scale):
         self.step = kwargs['resolution'] if 'resolution' in kwargs else None
         if self.default is not None:
             self.set_val(self.default)
-        self.bind('<MouseWheel>', self.mouseWheel)
-        self.bind('<Button-4>', self.mouseWheel)
-        self.bind('<Button-5>', self.mouseWheel)
+        self.bind('<MouseWheel>', self.mousewheel)
+        self.bind('<Button-4>', self.mousewheel)
+        self.bind('<Button-5>', self.mousewheel)
         self.sys_events = {
             'scroll_up': {'unix': 4, 'win': +120},
             'scroll_down': {'unix': 5, 'win': -120}}
 
-    def mouseWheel(self, event):
+    def mousewheel(self, event):
         scroll_up = (
             event.num == self.sys_events['scroll_up']['unix'] or
             event.delta == self.sys_events['scroll_up']['win'])
@@ -272,14 +272,14 @@ class ScrollingFrame(Frame):
 
         scrolling_widgets = [self.scrolling, self.v_scrollbar]
         for widget in scrolling_widgets:
-            widget.bind('<MouseWheel>', self.mouseWheel)
-            widget.bind('<Button-4>', self.mouseWheel)
-            widget.bind('<Button-5>', self.mouseWheel)
+            widget.bind('<MouseWheel>', self.mousewheel)
+            widget.bind('<Button-4>', self.mousewheel)
+            widget.bind('<Button-5>', self.mousewheel)
         self.sys_events = {
             'scroll_up': {'unix': 4, 'win': +120},
             'scroll_down': {'unix': 5, 'win': -120}}
 
-    def mouseWheel(self, event):
+    def mousewheel(self, event):
         scroll_up = (
             event.num == self.sys_events['scroll_up']['unix'] or
             event.delta == self.sys_events['scroll_up']['win'])
