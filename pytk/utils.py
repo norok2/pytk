@@ -195,7 +195,7 @@ class Geometry():
             self.height = int(tokens2[1])
             self.left = int(tokens1[1])
             self.top = int(tokens1[2])
-        except:
+        except IndexError:  # possibly a malformed geometry string
             self.width, self.height, self.left, self.top = 0, 0, 0, 0
 
     def __repr__(self):
