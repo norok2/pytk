@@ -137,6 +137,8 @@ setup(
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
+    install_requires=['flyingcircus'],
+
     setup_requires=[
         'setuptools',
         'setuptools_scm'
