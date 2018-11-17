@@ -7,7 +7,7 @@ from pytk import messagebox
 from pytk import filedialog
 from pytk import simpledialog
 
-from pytk import utils
+from pytk import util
 
 Frame = ttk.Frame
 Label = ttk.Label
@@ -18,10 +18,50 @@ Scrollbar = ttk.Scrollbar
 Canvas = tk.Canvas
 Treeview = ttk.Treeview
 Combobox = ttk.Combobox
-Entry = ttk.Entry
-Checkbutton = ttk.Checkbutton
+Entry_ = ttk.Entry
+Checkbutton_ = ttk.Checkbutton
 # Spinbox = tk.Spinbox
 Scale = tk.Scale
+
+
+# ======================================================================
+class Entry(Entry_):
+    def __init__(self, *args, **kwargs):
+        super(Entry, self).__init__(*args, **kwargs)
+
+    def get_val(self):
+        return self.get()
+
+    def set_val(self, val=''):
+        try:
+            if val is not None:
+                val = str(val)
+            else:
+                raise ValueError
+        except ValueError:
+            val = ''
+        state = self['state']
+        self['state'] = 'enabled'
+        self.delete(0, tk.END)
+        self.insert(0, val)
+        self['state'] = state
+
+
+# ======================================================================
+class Checkbutton(Checkbutton_):
+    def __init__(self, *args, **kwargs):
+        super(Checkbutton, self).__init__(*args, **kwargs)
+
+    def get_val(self):
+        return 'selected' in self.state()
+
+    def set_val(self, val=True):
+        # if (val and not self.get_val()) or (not val and self.get_val()):
+        if bool(val) ^ bool(self.get_val()):  # bitwise xor
+            self.toggle()
+
+    def toggle(self):
+        self.invoke()
 
 
 # ======================================================================
@@ -93,11 +133,11 @@ class Spinbox(tk.Spinbox):
 
     def mousewheel(self, event):
         scroll_up = (
-            event.num == self.sys_events['scroll_up']['unix'] or
-            event.delta == self.sys_events['scroll_up']['win'])
+                event.num == self.sys_events['scroll_up']['unix'] or
+                event.delta == self.sys_events['scroll_up']['win'])
         scroll_down = (
-            event.num == self.sys_events['scroll_down']['unix'] or
-            event.delta == self.sys_events['scroll_down']['win'])
+                event.num == self.sys_events['scroll_down']['unix'] or
+                event.delta == self.sys_events['scroll_down']['win'])
         if scroll_up:
             self.invoke('buttonup')
         elif scroll_down:
@@ -111,7 +151,7 @@ class Spinbox(tk.Spinbox):
         return result
 
     def get_val(self):
-        return utils.auto_convert(self.get())
+        return util.auto_convert(self.get())
 
     def set_val(self, val=''):
         if self.is_valid(val):
@@ -153,11 +193,11 @@ class Range(Scale):
 
     def mousewheel(self, event):
         scroll_up = (
-            event.num == self.sys_events['scroll_up']['unix'] or
-            event.delta == self.sys_events['scroll_up']['win'])
+                event.num == self.sys_events['scroll_up']['unix'] or
+                event.delta == self.sys_events['scroll_up']['win'])
         scroll_down = (
-            event.num == self.sys_events['scroll_down']['unix'] or
-            event.delta == self.sys_events['scroll_down']['win'])
+                event.num == self.sys_events['scroll_down']['unix'] or
+                event.delta == self.sys_events['scroll_down']['win'])
         if scroll_up:
             self.set_val(self.get_val() + self.step)
         elif scroll_down:
@@ -168,7 +208,7 @@ class Range(Scale):
         return result
 
     def get_val(self):
-        return utils.auto_convert(self.get())
+        return util.auto_convert(self.get())
 
     def set_val(self, val=0):
         if self.is_valid(val):
@@ -281,11 +321,11 @@ class ScrollingFrame(Frame):
 
     def mousewheel(self, event):
         scroll_up = (
-            event.num == self.sys_events['scroll_up']['unix'] or
-            event.delta == self.sys_events['scroll_up']['win'])
+                event.num == self.sys_events['scroll_up']['unix'] or
+                event.delta == self.sys_events['scroll_up']['win'])
         scroll_down = (
-            event.num == self.sys_events['scroll_down']['unix'] or
-            event.delta == self.sys_events['scroll_down']['win'])
+                event.num == self.sys_events['scroll_down']['unix'] or
+                event.delta == self.sys_events['scroll_down']['win'])
         if scroll_up:
             self.canvas.yview_scroll(-1, 'units')
         elif scroll_down:
