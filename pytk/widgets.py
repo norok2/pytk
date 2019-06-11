@@ -26,8 +26,8 @@ Scale = tk.Scale
 
 # ======================================================================
 class Entry(Entry_):
-    def __init__(self, *args, **kwargs):
-        super(Entry, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Entry, self).__init__(*_args, **_kws)
 
     def get_val(self):
         return self.get()
@@ -49,8 +49,8 @@ class Entry(Entry_):
 
 # ======================================================================
 class Checkbutton(Checkbutton_):
-    def __init__(self, *args, **kwargs):
-        super(Checkbutton, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Checkbutton, self).__init__(*_args, **_kws)
 
     def get_val(self):
         return 'selected' in self.state()
@@ -66,8 +66,8 @@ class Checkbutton(Checkbutton_):
 
 # ======================================================================
 class Text(Entry):
-    def __init__(self, *args, **kwargs):
-        super(Text, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Text, self).__init__(*_args, **_kws)
 
     def get_val(self):
         return self.get()
@@ -89,8 +89,8 @@ class Text(Entry):
 
 # ======================================================================
 class Checkbox(Checkbutton):
-    def __init__(self, *args, **kwargs):
-        super(Checkbox, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Checkbox, self).__init__(*_args, **_kws)
 
     def get_val(self):
         return 'selected' in self.state()
@@ -106,22 +106,22 @@ class Checkbox(Checkbutton):
 
 # ======================================================================
 class Spinbox(tk.Spinbox):
-    def __init__(self, *args, **kwargs):
-        if 'start' in kwargs:
-            kwargs['from_'] = kwargs.pop('start')
-        if 'stop' in kwargs:
-            kwargs['to'] = kwargs.pop('stop')
-        if 'step' in kwargs:
-            kwargs['increment'] = kwargs.pop('step')
-        if 'default' in kwargs:
-            self.default = kwargs.pop('default')
+    def __init__(self, *_args, **_kws):
+        if 'start' in _kws:
+            _kws['from_'] = _kws.pop('start')
+        if 'stop' in _kws:
+            _kws['to'] = _kws.pop('stop')
+        if 'step' in _kws:
+            _kws['increment'] = _kws.pop('step')
+        if 'default' in _kws:
+            self.default = _kws.pop('default')
         else:
             self.default = None
-        super(Spinbox, self).__init__(*args, **kwargs)
-        self.values = kwargs['values'] if 'values' in kwargs else None
-        self.start = kwargs['from_'] if 'from_' in kwargs else None
-        self.stop = kwargs['to'] if 'to' in kwargs else None
-        self.step = kwargs['increment'] if 'increment' in kwargs else None
+        super(Spinbox, self).__init__(*_args, **_kws)
+        self.values = _kws['values'] if 'values' in _kws else None
+        self.start = _kws['from_'] if 'from_' in _kws else None
+        self.stop = _kws['to'] if 'to' in _kws else None
+        self.step = _kws['increment'] if 'increment' in _kws else None
         if self.default is not None:
             self.set_val(self.default)
         self.bind('<MouseWheel>', self.mousewheel)
@@ -166,22 +166,22 @@ class Spinbox(tk.Spinbox):
 
 # ======================================================================
 class Range(Scale):
-    def __init__(self, *args, **kwargs):
-        if 'start' in kwargs:
-            kwargs['from_'] = kwargs.pop('start')
-        if 'stop' in kwargs:
-            kwargs['to'] = kwargs.pop('stop')
-        if 'step' in kwargs:
-            kwargs['resolution'] = kwargs.pop('step')
-        if 'default' in kwargs:
-            self.default = kwargs.pop('default')
+    def __init__(self, *_args, **_kws):
+        if 'start' in _kws:
+            _kws['from_'] = _kws.pop('start')
+        if 'stop' in _kws:
+            _kws['to'] = _kws.pop('stop')
+        if 'step' in _kws:
+            _kws['resolution'] = _kws.pop('step')
+        if 'default' in _kws:
+            self.default = _kws.pop('default')
         else:
             self.default = None
-        kwargs['showvalue'] = False
-        super(Range, self).__init__(*args, **kwargs)
-        self.start = kwargs['from_'] if 'from_' in kwargs else None
-        self.stop = kwargs['to'] if 'to' in kwargs else None
-        self.step = kwargs['resolution'] if 'resolution' in kwargs else None
+        _kws['showvalue'] = False
+        super(Range, self).__init__(*_args, **_kws)
+        self.start = _kws['from_'] if 'from_' in _kws else None
+        self.stop = _kws['to'] if 'to' in _kws else None
+        self.step = _kws['resolution'] if 'resolution' in _kws else None
         if self.default is not None:
             self.set_val(self.default)
         self.bind('<MouseWheel>', self.mousewheel)
@@ -221,8 +221,8 @@ class Range(Scale):
 
 # ======================================================================
 class Listbox(Combobox):
-    def __init__(self, *args, **kwargs):
-        super(Listbox, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Listbox, self).__init__(*_args, **_kws)
         self['state'] = 'readonly'
 
     def get_values(self):
@@ -237,8 +237,8 @@ class Listbox(Combobox):
 
 # ======================================================================
 class Listview(Treeview):
-    def __init__(self, *args, **kwargs):
-        super(Listview, self).__init__(*args, **kwargs)
+    def __init__(self, *_args, **_kws):
+        super(Listview, self).__init__(*_args, **_kws)
 
     def get_items(self):
         return [self.item(child, 'text') for child in self.get_children('')]
@@ -263,8 +263,8 @@ class ScrollingFrame(Frame):
     def __init__(
             self, parent,
             label_kws=None, label_pack_kws=None,
-            *args, **kwargs):
-        super(ScrollingFrame, self).__init__(parent, *args, **kwargs)
+            *_args, **_kws):
+        super(ScrollingFrame, self).__init__(parent, *_args, **_kws)
 
         if label_kws:
             self.label = Label(parent, **label_kws)
