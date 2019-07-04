@@ -3,6 +3,7 @@ import warnings
 
 from pytk import tk
 from pytk import msg, dbg
+from pytk.Geometry import Geometry
 
 
 # ======================================================================
@@ -172,184 +173,18 @@ def center(target, parent=None):
         parent.update_idletasks()
         parent_geom = Geometry(parent.winfo_geometry())
     target_geom = Geometry(target.winfo_geometry()).set_to_center(parent_geom)
-    target.geometry(target_geom.as_str())
+    target.geometry(str(target_geom))
 
 
 # ======================================================================
-class Geometry():
-    def __init__(self, geometry_text=None):
-        """
-        Generate a geometry object from the standard Tk geometry string.
+def set_aspect(target, parent, aspect=1.0):
+    def enforce_aspect_ratio(event):
+        width = event.width
+        height = int(event.width / aspect)
+        if height > event.height:
+            height = event.height
+            width = int(event.height * aspect)
+        target.place(
+            in_=parent, x=0, y=0, width=width, height=height)
 
-        Args:
-            geometry_text (str): The standard Tk geometry string.
-                [width]x[height]+[left]+[top]
-
-        Returns:
-            None.
-        """
-        try:
-            tokens1 = geometry_text.split('+')
-            tokens2 = tokens1[0].split('x')
-            self.width = int(tokens2[0])
-            self.height = int(tokens2[1])
-            self.left = int(tokens1[1])
-            self.top = int(tokens1[2])
-        except IndexError:  # possibly a malformed geometry string
-            self.width, self.height, self.left, self.top = 0, 0, 0, 0
-
-    def __repr__(self):
-        return self.as_str()
-
-    def as_dict(self):
-        return {
-            'w': self.width,
-            'h': self.height,
-            'l': self.left,
-            't': self.top}
-
-    def as_tuple(self):
-        return self.width, self.height, self.left, self.top
-
-    def as_str(self):
-        return '{w:d}x{h:d}+{l:d}+{t:d}'.format(**self.as_dict())
-
-    def set_to_center(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width // 2 - self.width // 2 + parent.left
-        self.top = parent.height // 2 - self.height // 2 + parent.top
-        return self
-
-    def set_to_origin(self):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = 0
-        self.top = 0
-        return self
-
-    def set_to_top_left(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.left
-        self.top = parent.top
-        return self
-
-    def set_to_top(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width // 2 - self.width // 2 + parent.left
-        self.top = parent.top
-        return self
-
-    def set_to_top_right(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width - self.width + parent.left
-        self.top = parent.top
-        return self
-
-    def set_to_right(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width - self.width + parent.left
-        self.top = parent.height // 2 - self.height // 2 + parent.top
-        return self
-
-    def set_to_bottom_right(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width - self.width + parent.left
-        self.top = parent.height - self.height + parent.top
-        return self
-
-    def set_to_bottom(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.width // 2 - self.width // 2 + parent.left
-        self.top = parent.height - self.height + parent.top
-        return self
-
-    def set_to_bottom_left(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.left
-        self.top = parent.height - self.height + parent.top
-        return self
-
-    def set_to_left(self, parent):
-        """
-        Update the geometry to be centered with respect to a container.
-
-        Args:
-            parent (Geometry): The geometry of the container.
-
-        Returns:
-            geometry (Geometry): The updated geometry.
-        """
-        self.left = parent.left
-        self.top = parent.height // 2 - self.height // 2 + parent.top
-        return self
+    parent.bind("<Configure>", enforce_aspect_ratio)
