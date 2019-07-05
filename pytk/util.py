@@ -165,15 +165,19 @@ def set_icon(
 
 
 # ======================================================================
-def center(target, parent=None):
+def center(target, reference=None):
     target.update_idletasks()
-    if parent is None:
-        parent_geom = Geometry(get_curr_screen_geometry())
+    if reference is None:
+        geometry = get_curr_screen_geometry()
+    elif not isinstance(reference, (str, Geometry)):
+        reference.update_idletasks()
+        geometry = reference.winfo_geometry()
     else:
-        parent.update_idletasks()
-        parent_geom = Geometry(parent.winfo_geometry())
-    target_geom = Geometry(target.winfo_geometry()).set_to_center(parent_geom)
-    target.geometry(str(target_geom))
+        geometry = reference
+    if isinstance(reference, str):
+        geometry = Geometry(geometry)
+    target_geometry = Geometry(target.winfo_geometry())
+    target.geometry(str(target_geometry.set_to_center(geometry)))
 
 
 # ======================================================================
