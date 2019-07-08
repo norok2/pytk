@@ -112,7 +112,7 @@ def auto_convert(
 
 
 # ======================================================================
-def get_curr_screen_geometry():
+def get_screen_geometry(from_all=False):
     """
     Workaround to get the size of the current screen in a multi-screen setup.
 
@@ -120,13 +120,19 @@ def get_curr_screen_geometry():
         geometry (str): The standard Tk geometry string.
             [width]x[height]+[left]+[top]
     """
-    temp = tk.Tk()
-    temp.update()
-    temp.attributes('-fullscreen', True)
-    temp.state('iconic')
-    geometry = temp.winfo_geometry()
-    temp.destroy()
+    root = tk.Tk()
+    if from_all:
+        width = root.winfo_screenwidth()
+        height = root.winfo_screenheight()
+        geometry = str(Geometry(width=width, height=height))
+    else:
+        root.update_idletasks()
+        root.attributes('-fullscreen', True)
+        root.state('iconic')
+        geometry = root.winfo_geometry()
+    root.destroy()
     return geometry
+
 
 
 # ======================================================================
@@ -168,7 +174,7 @@ def set_icon(
 def center(target, reference=None):
     target.update_idletasks()
     if reference is None:
-        geometry = get_curr_screen_geometry()
+        geometry = get_screen_geometry()
     elif not isinstance(reference, (str, Geometry)):
         reference.update_idletasks()
         geometry = reference.winfo_geometry()
