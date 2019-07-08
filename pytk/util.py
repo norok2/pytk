@@ -134,7 +134,6 @@ def get_screen_geometry(from_all=False):
     return geometry
 
 
-
 # ======================================================================
 def set_icon(
         root,
