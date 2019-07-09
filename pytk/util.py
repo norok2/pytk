@@ -179,7 +179,7 @@ def center(target, reference=None):
         geometry = reference.winfo_geometry()
     else:
         geometry = reference
-    if isinstance(reference, str):
+    if isinstance(geometry, str):
         geometry = Geometry(geometry)
     target_geometry = Geometry(target.winfo_geometry())
     target.geometry(str(target_geometry.set_to_center(geometry)))
