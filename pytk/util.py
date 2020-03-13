@@ -1,79 +1,25 @@
 import os
 import warnings
 
+import flyingcircus as fc
+
 from pytk import tk
 from pytk import msg, dbg
 from pytk.Geometry import Geometry
 
 
 # ======================================================================
-def has_decorator(
-        text,
-        pre_decor='"',
-        post_decor='"'):
-    """
-    Determine if a string is delimited by some characters (decorators).
-
-    Args:
-        text (str): The text input string.
-        pre_decor (str): initial string decorator.
-        post_decor (str): final string decorator.
-
-    Returns:
-        has_decorator (bool): True if text is delimited by the specified chars.
-
-    Examples:
-        >>> has_decorator('"test"')
-        True
-        >>> has_decorator('"test')
-        False
-        >>> has_decorator('<test>', '<', '>')
-        True
-    """
-    return text.startswith(pre_decor) and text.endswith(post_decor)
-
-
-# ======================================================================
-def strip_decorator(
-        text,
-        pre_decor='"',
-        post_decor='"'):
-    """
-    Strip initial and final character sequences (decorators) from a string.
-
-    Args:
-        text (str): The text input string.
-        pre_decor (str): initial string decorator.
-        post_decor (str): final string decorator.
-
-    Returns:
-        text (str): the text without the specified decorators.
-
-    Examples:
-        >>> strip_decorator('"test"')
-        'test'
-        >>> strip_decorator('"test')
-        'test'
-        >>> strip_decorator('<test>', '<', '>')
-        'test'
-    """
-    begin = len(pre_decor) if text.startswith(pre_decor) else None
-    end = -len(post_decor) if text.endswith(post_decor) else None
-    return text[begin:end]
-
-
-# ======================================================================
 def auto_convert(
         text,
-        pre_decor=None,
-        post_decor=None):
+        pre_delim=None,
+        post_delim=None):
     """
     Convert value to numeric if possible, or strip delimiters from string.
 
     Args:
         text (str|int|float|complex): The text input string.
-        pre_decor (str): initial string decorator.
-        post_decor (str): final string decorator.
+        pre_delim (str): initial string decorator.
+        post_delim (str): final string decorator.
 
     Returns:
         val (int|float|complex): The numeric value of the string.
@@ -93,9 +39,9 @@ def auto_convert(
         1000.0
     """
     if isinstance(text, str):
-        if pre_decor and post_decor and \
-                has_decorator(text, pre_decor, post_decor):
-            text = strip_decorator(text, pre_decor, post_decor)
+        if pre_delim and post_delim and \
+                fc.base.has_delim(text, pre_delim, post_delim):
+            text = fc.base.strip_delim(text, pre_delim, post_delim)
         try:
             val = int(text)
         except (TypeError, ValueError):
