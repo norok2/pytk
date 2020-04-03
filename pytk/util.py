@@ -40,8 +40,8 @@ def auto_convert(
     """
     if isinstance(text, str):
         if pre_delim and post_delim and \
-                fc.base.has_delim(text, pre_delim, post_delim):
-            text = fc.base.strip_delim(text, pre_delim, post_delim)
+                fc.has_delim(text, pre_delim, post_delim):
+            text = fc.strip_delim(text, pre_delim, post_delim)
         try:
             val = int(text)
         except (TypeError, ValueError):
