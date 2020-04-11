@@ -24,16 +24,16 @@ The recommended way of installing the software is through
 
 .. code:: shell
 
-    $ pip install autoui
+    $ pip install pytk
 
 Alternatively, you can clone the source repository from
 `GitHub <https://github.com/norok2/pytk>`_:
 
 .. code:: shell
 
-    $ mkdir autoui
-    $ cd autoui
-    $ git clone git@github.com:norok2/autoui.git
+    $ mkdir pytk
+    $ cd pytk
+    $ git clone git@github.com:norok2/pytk.git
     $ python setup.py install
 
 (some steps may require additional permissions depending on your configuration)
