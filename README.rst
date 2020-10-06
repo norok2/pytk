@@ -2,20 +2,13 @@ PyTK - Python ToolKit
 =====================
 
 **PyTK** - Python ToolKit:
-Python abstract graphical user-interface toolkit
+A thin Pythonic layer on top of TkInter GUI.
 
-This Python library intend to provide a sensible abstraction layer on top of
-the most widely used GUI toolkits.
-This is similar to `AnyGUI <https://wiki.python.org/moin/AnyGui>`_
-except that we focus more on offering full and stable support for the standard
-Python GUI toolkit.
-
-For the moment, however, only a few tricks for common ``tkinter`` implementation
-patterns are in place.
+This Python library intend to provide a thin Pythonic abstraction layer on top
+of the most widely used ``tkinter`` functionalities.
 
 The widget semantic follows, when possible, HTML conventions.
 
-There are plans to includes support for Text-based UIs (via ``asciimatics``).
 
 Installation
 ------------

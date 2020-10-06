@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-pytk - Python ToolKit: Python abstract graphical user-interface toolkit
+pytk - Python ToolKit: A thin Pythonic layer on top of TkInter GUI.
 """
 
 # Copyright (c) Riccardo Metere <rick@metere.it>

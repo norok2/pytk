@@ -90,7 +90,7 @@ def fix_version(
 setup(
     name=NAME.lower(),
 
-    description='Automatic generation of user-interfaces.',
+    description='A thin Pythonic layer on top of TkInter GUI.',
     long_description=LONG_DESCRIPTION_TEXT,
 
     # use_scm_version=True,
